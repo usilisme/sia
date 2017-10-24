@@ -1,0 +1,3 @@
+AC 9V-SB2.
+Please note the following defect is found on the air plane:
+ACU is not cold.

@@ -3,4 +3,10 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-# Register your models here.
+from flights.models import (
+	Airplane, FlightHistory, Parking
+	)
+
+admin.site.register(Airplane)
+#admin.site.register(FlightHistory)
+admin.site.register(Parking)

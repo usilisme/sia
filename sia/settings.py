@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'users', 'staffs', 'fleets', 'cases',
+    'users', 'staffs', 'fleets', 'cases', 'flights'
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -115,6 +116,7 @@ JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER':
     #'rest_framework_jwt.utils.jwt_response_payload_handler',
     'users.views.jwt_response_payload_handler',
+    'JWT_EXPIRATION_DELTA': timedelta(seconds=3000),
 }
 
 # Internationalization

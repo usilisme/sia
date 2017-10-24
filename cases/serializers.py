@@ -6,7 +6,11 @@ from users.serializers import UserSerializer
 from cases.models import (
 	CaseHeader, CaseHistory
 )
- 
+from flights.models import(
+    Airplane, Parking,
+)
+
+
 class CaseHeaderSerializer(serializers.ModelSerializer):
     #case = serializers.ReadOnlyField(reporter='user.username')
 
@@ -21,9 +25,14 @@ class CaseHeaderSerializer(serializers.ModelSerializer):
     	case.CreatedOn = datetime.today()
     	case.LastUpdOn = datetime.today()
         case.Status = 'OPENED'
-        case.Airplane = ''
+        
 
-    	case.FlightNo = validated_data.get('FlightNo',None)
+        vFlightNo = validated_data.get('FlightNo',None)
+    	case.FlightNo = vFlightNo
+        oAirplane = Parking.objects.all().filter(FlightNoFr = vFlightNo).get().Airplane
+        #vAirplane = Airplane.objects.all().filter(RegNo = '9V-SB1').get()
+        case.Airplane = oAirplane
+
     	case.ProblemArea = validated_data.get('ProblemArea',None)
     	case.Title = validated_data.get('Title',None)
     	case.SeatNo = validated_data.get('SeatNo',None)
@@ -60,6 +69,7 @@ class CaseHeaderSerializer(serializers.ModelSerializer):
         		,'Title','SeatNo','ToiletNo', 'Reporter'
         		, 'Reporter_Name'
         		, 'Feedback'
+                , 'AirplaneNo'
       
         	)
         extra_kwargs = {

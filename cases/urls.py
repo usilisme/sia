@@ -27,5 +27,8 @@ urlpatterns = [
     	, views.CaseDetail.as_view()
     	, name = 'case-detail'
     ),
-
+    url( r'^cases/(?P<FlightNo>[\w]+)/$'
+        , views.CaseResolved.as_view()
+        , name = 'case-resolved'
+    ),
 ]

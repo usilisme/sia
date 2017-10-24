@@ -11,17 +11,28 @@ from rest_framework.views import APIView
 
 from cases.serializers import CaseHeaderSerializer
 from cases.models import CaseHeader
-
+from flights.models import FlightHistory
 
 #API
 class CaseList(generics.ListCreateAPIView):
-	permission_classes = (IsAuthenticated,)
+	#permission_classes = (IsAuthenticated,)
 	serializer_class = CaseHeaderSerializer
 
 	def get_queryset(self):
 		user = self.request.user
 		queryset = CaseHeader.objects.all().filter(AssignedTo = user)
 		return queryset
+
+class CaseResolved(generics.ListCreateAPIView):
+	permission_classes = (IsAuthenticated,)
+	serializer_class = CaseHeaderSerializer
+
+	def get_queryset(self):
+		user = self.request.user
+		CurAirplane = FlightHistory.objects.all().filter(FlightNo = self.kwargs['FlightNo']).get().id
+		queryset = CaseHeader.objects.all().filter(Airplane_id = CurAirplane)
+		return queryset
+
 
 class CaseDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = CaseHeader.objects.all()
