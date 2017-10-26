@@ -257,7 +257,7 @@ def CloseQueueItem():
 	return None
 
 #Empty the Queue when the program is off
-#@atexit.register
+@atexit.register
 def EmptyQueue():
 	print('ETL STOPPED...')
 	conn = create_connection()
