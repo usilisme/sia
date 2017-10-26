@@ -97,7 +97,7 @@ def main():
 def InitQueue():
 	conn = create_connection()
 	sql_init = '''
-		insert into cases_qDefect( TimeSlot_Id, Airplane_Id, Defect_Id, 
+		insert into cases_qdefect( TimeSlot_Id, Airplane_Id, Defect_Id, 
 		ProblemArea ,Status, ServicingPort, DeadlineTime
 		)
 		select  tt.id, f.airplane_id, c.id, 
