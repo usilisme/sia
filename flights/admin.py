@@ -9,4 +9,10 @@ from flights.models import (
 
 admin.site.register(Airplane)
 #admin.site.register(FlightHistory)
-admin.site.register(Parking)
+@admin.register(Parking)
+class ParkingAdmin(admin.ModelAdmin):
+	list_display = ('id','Airplane'
+		,'DateTimeFr','DateTimeTo'
+		,'FlightNoFr','FlightNoTo'
+		,'PortFr','PortTo'
+	)

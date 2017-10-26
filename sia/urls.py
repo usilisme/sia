@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import (url, include,
 	)
 from django.contrib import admin
-
+from django.utils.translation import ugettext_lazy as _
 from sia import views
 
 urlpatterns = [
@@ -32,3 +32,6 @@ urlpatterns = [
     	, include('cases.urls', namespace='cases')
     ),
 ]
+
+admin.site.site_header = _("OPONO Defect Management")
+admin.site.site_title = _("OPONO")

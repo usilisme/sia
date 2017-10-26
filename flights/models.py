@@ -89,12 +89,20 @@ class Parking(Model):
 	DateTimeFr = DateTimeField(
 		blank = True, null = True
 	)
+	PortFr = CharField(
+		max_length = 100,
+		blank = True, null = True,
+	)
 	FlightNoTo = CharField(
 		max_length = 100,
 		blank = True, null = True,	
 	)
 	DateTimeTo = DateTimeField(
 		blank = True, null = True
+	)
+	PortTo = CharField(
+		max_length = 100,
+		blank = True, null = True,
 	)
 	Bay = CharField(
 		max_length = 100,

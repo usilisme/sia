@@ -13,19 +13,32 @@ from django.db.models import (
     ImageField, OneToOneField,
     PositiveIntegerField,
     DecimalField,
-    ForeignKey,
+    ForeignKey, ManyToManyField,
 )
 
 from users.models import User
 from flights.models import Airplane
 
-
+class Part(Model):
+	PartKey = CharField(
+		max_length = 100,
+		blank = True, null = True,
+	)
+	PartName = CharField(
+		max_length = 100,
+		blank = True, null = True,
+	)
+	StockQty = PositiveIntegerField(
+		default = 0
+	)
+	def __str__(self):
+		return self.PartName
 
 class CaseHeader (Model):
 	CHOICES_PRIORITY = (
-				('H','High'),
-				('M','Medium'),
-				('L','Low')
+				('0','High'),
+				('1','Medium'),
+				('2','Low')
 				)
 
 	CHOICES_PROBLEM_AREA = (
@@ -38,9 +51,7 @@ class CaseHeader (Model):
 
 	CHOICES_STATUS = (
 		('OPENED','OPENED'),
-		('RESOLVED','RESOLVED'),
 		('IN-PROGRESS','IN-PROGRESS'),
-		('RE-OPENED','RE-OPENED'),
 		('CLOSED','CLOSED'),
 	)
 
@@ -189,6 +200,8 @@ class CaseHeader (Model):
         default = 0
     )
 
+	Part = ManyToManyField(Part)
+
 	def __str__(self):
 		return str(self.Title)
 
@@ -227,7 +240,7 @@ class TimeSlot(Model):
 		blank = True, null = True,
 	)
 	def __str__(self):
-		return self.TimeSlotFr.strftime("%H:%M") + " - " + self.TimeSlotTo.strftime("%H:%M")
+		return self.TimeSlotFr.strftime('%H:%M %p')
 
 class qDefect(Model):
 	TimeSlot = ForeignKey(
@@ -256,6 +269,26 @@ class qDefect(Model):
 	isPartSupplied = NullBooleanField(
 		blank = True, null = True,
 	)
+	ServicingPort = CharField(
+		max_length = 100,
+		blank = True, null = True
+	)
+
+	CHOICES_STATUS = (
+		('SCHEDULED','SCHEDULED'),
+		('TRANSFERRED','TRANSFERRED'),
+		('EXTENDED','EXTENDED'),
+	)
+	Status = CharField(
+		max_length = 100,
+		blank = True, null = True,
+		choices = CHOICES_STATUS,
+		default = 'SCHEDULED',
+	)
+	DeadlineTime = TimeField(
+		blank = True, null = True,
+	)
+
 	def __str__(self):
 		return str(self.id)
 

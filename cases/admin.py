@@ -6,12 +6,16 @@ from django.contrib import admin
 from cases.models import (
 	CaseHeader, CaseHistory,
 	TimeSlot,
-	qDefect,TechnicianStatistic,
+	qDefect,TechnicianStatistic, Part
 )
+
+@admin.register(Part)
+class PartAdmin(admin.ModelAdmin):
+	list_display = ('id','PartKey','PartName','StockQty',)
 
 @admin.register(CaseHeader)
 class DefectAdmin(admin.ModelAdmin):
-	list_display = ('id','FlightNo'
+	list_display = ('id','Airplane'
 		,'CreatedOn','ClosedOn','Age'
 		,'ProblemArea','Title','Status'
 		,'Fixer'
@@ -41,6 +45,9 @@ class DefectAdmin(admin.ModelAdmin):
 		}),
 		('Reporter Details',{
 			'fields': ('Reporter',)
+		}),
+		('Part Details',{
+			'fields': ('Part',)
 		})
 	)
 		
@@ -51,7 +58,8 @@ class DefectAdmin(admin.ModelAdmin):
 
 @admin.register(qDefect)
 class qDefectAdmin(admin.ModelAdmin):
-	list_display = ('id','TimeSlot','Airplane','Defect','Fixer','isPartAvailable')
+	list_display = ('id','Status','ServicingPort'
+		,'TimeSlot','DeadlineTime','Airplane','Defect','Fixer','isPartAvailable')
 	pass
 
 @admin.register(TechnicianStatistic)
