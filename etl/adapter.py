@@ -3,7 +3,7 @@ import sqlite3
 from sqlite3 import Error
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-database = root+"\db.sqlite3"
+database = os.path.join(root, 'db.sqlite3')
 
 
 def create_connection():
