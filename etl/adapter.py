@@ -1,7 +1,10 @@
+import os
 import sqlite3
 from sqlite3 import Error
 
-database = "C:\\Users\usilisme\OneDrive\Projects\sia\db.sqlite3"
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+database = root+"\db.sqlite3"
+
 
 def create_connection():
     """ create a database connection to the SQLite database
