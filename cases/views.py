@@ -33,7 +33,6 @@ class CaseResolved(generics.ListCreateAPIView):
 		queryset = CaseHeader.objects.all().filter(Airplane_id = CurAirplane)
 		return queryset
 
-
 class CaseDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = CaseHeader.objects.all()
 	serializer_class = CaseHeaderSerializer

@@ -60,6 +60,7 @@ def main():
 			if fixer_id == None:
 				fixer_id = AssignAny(conn,defect[0], defect[1])
 
+
 			#Check if part is available.
 			isPartAvailable = CheckPart(conn,defect[0],defect[3])
 
@@ -67,7 +68,7 @@ def main():
 			#e.g. if there is no part or if there is not enought time left.			
 			nextPort = defect[5]
 			print defect[4]
-			if defect[4] == 'TRANSFERRED' or TimeLeft < 30:
+			if defect[4] == 'TRANSFERRED' or TimeLeft.seconds/60 < 30:
 				nextPort = Transfer(conn,defect[5],defect[6])
 				print(nextPort)
 				if nextPort == None:
@@ -89,6 +90,20 @@ def main():
 				}
 			)
 			conn.commit()
+
+			sql_sync = '''
+				UPDATE cases_CaseHeader
+				SET Fixer_Id = :fixer_id
+				WHERE id = :defect_id
+			'''
+			conn.execute(sql_sync,
+				{'defect_id':defect[3],
+					'fixer_id':fixer_id,
+				}
+			)
+			conn.commit()
+
+
 		#Loop till there is not more tasks require attention.
 		conn.close()
 ##ENDING OF THE MAIN PROGRAM

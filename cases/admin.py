@@ -17,8 +17,8 @@ class PartAdmin(admin.ModelAdmin):
 class DefectAdmin(admin.ModelAdmin):
 	list_display = ('id','Airplane'
 		,'CreatedOn','ClosedOn','Age'
-		,'ProblemArea','Title','Status'
-		,'Fixer'
+		,'ProblemArea','Title','SeatNo'
+		,'Status','Fixer'
 	)
 	list_filter = ('Status',)
 

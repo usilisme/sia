@@ -180,7 +180,8 @@ class CaseHeader (Model):
 
 	Feedback= CharField(
 		max_length = 100,
-		blank=True, null=True
+		blank=True, null=True,
+		default = '',
 	)
 
 	SeatNo = CharField(
@@ -200,7 +201,10 @@ class CaseHeader (Model):
         default = 0
     )
 
-	Part = ManyToManyField(Part)
+	Part = ManyToManyField(
+		Part,
+		blank = True, null = True, 
+	)
 
 	def __str__(self):
 		return str(self.Title)
