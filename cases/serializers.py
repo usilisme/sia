@@ -37,7 +37,7 @@ class CaseHeaderSerializer(serializers.ModelSerializer):
     	case.ProblemArea = validated_data.get('ProblemArea',None)
     	case.Title = validated_data.get('Title',None)
     	case.SeatNo = validated_data.get('SeatNo','N.A.')
-    	case.ToiletNo = validated_data.get('ToiletNo','')
+    	case.ToiletNo = validated_data.get('ToiletNo','N.A.')
     	case.Reporter = aReporter
     	case.save()
 
