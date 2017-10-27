@@ -65,7 +65,7 @@ class CaseHeaderSerializer(serializers.ModelSerializer):
         model = CaseHeader
         fields = ('url','id','CaseHeaderKey','CreatedOn'
         		,'LastUpdOn' , 'FlightNo'
-        		, 'Status'
+        		,'Priority' , 'Status'
         		, 'ProblemArea'
         		,'Title','SeatNo','ToiletNo', 'Reporter'
         		, 'Reporter_Name'
