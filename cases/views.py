@@ -20,7 +20,7 @@ class CaseList(generics.ListCreateAPIView):
 
 	def get_queryset(self):
 		user = self.request.user
-		queryset = CaseHeader.objects.all().filter(AssignedTo = user)
+		queryset = CaseHeader.objects.all().filter(Fixer = user)
 		return queryset
 
 class CaseResolved(generics.ListCreateAPIView):
