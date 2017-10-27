@@ -120,9 +120,8 @@ def InitQueue():
 		FROM cases_timeslot tt
 		INNER JOIN flights_parking f ON time(f.DateTimeFr) BETWEEN tt.TimeSlotFr AND tt.TimeSlotTo
 		INNER JOIN cases_caseHeader c ON f.airplane_id = c.Airplane_id
-		WHERE PortTo = 'SIN';
+		WHERE PortTo = 'SIN' AND c.Status != 'CLOSED';
 	'''
-	#WHERE c.Status != 'CLOSED'
 
 	conn.execute(sql_init)
 	conn.commit()
