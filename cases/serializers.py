@@ -53,6 +53,7 @@ class CaseHeaderSerializer(serializers.ModelSerializer):
     	instance.Status = validated_data.get('Status', instance.Status)
     	StatusTo = instance.Status
     	instance.Feedback = validated_data.get('Feedback', instance.Feedback)
+        instance.save()
 
     	hist = CaseHistory()
     	hist.CaseHeaderKey = instance.CaseHeaderKey
