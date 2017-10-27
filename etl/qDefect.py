@@ -237,6 +237,9 @@ def CheckPart(conn,qid,Defect_Id):
 	'''
 	c = conn.cursor()
 	r = c.execute(sql_check,{'Defect_Id':Defect_Id}).fetchone()
+	if r == None:
+		return False
+
 	if(r[0]>0):
 		return True
 	else:
