@@ -33,6 +33,7 @@ class CaseHeaderSerializer(serializers.ModelSerializer):
         #vAirplane = Airplane.objects.all().filter(RegNo = '9V-SB1').get()
         case.Airplane = oAirplane
 
+        case.Priority = validated_data.get('Priority',None)
     	case.ProblemArea = validated_data.get('ProblemArea',None)
     	case.Title = validated_data.get('Title',None)
     	case.SeatNo = validated_data.get('SeatNo',None)
